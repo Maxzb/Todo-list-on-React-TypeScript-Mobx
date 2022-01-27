@@ -3,20 +3,20 @@ import TextField from "@mui/material/TextField";
 import { useStyles } from "./styles";
 import { TodoFormProps } from "./types";
 
-export const TodoForm: FC<TodoFormProps> = props => {
+export const TodoForm: FC<TodoFormProps> = (props) => {
   const styles = useStyles();
-  const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>("");
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
-    if (event.key == 'Enter') {
+    if (event.key === "Enter") {
       props.onAdd(title);
-      setTitle('');
+      setTitle("");
     }
-  }
+  };
 
   return (
     <TextField
