@@ -1,48 +1,30 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { Container } from "@mui/material";
 import { Navbar } from "./components/Navbar";
 import { TodoForm } from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
+import { observer } from "mobx-react-lite";
+import store from "./store";
 import { ITodo } from "./interfaces";
 
 const App: FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
 
-  const toggleHandler = (id: number) => {
-    setTodos(prev =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      })
+  useEffect(() => {
+    store.todos = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[];
+  }, []);
+
+  /* useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(store.todos)
     );
-  };
-
-  const toggleRemove = (id: number) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id));
-  };
-
-  const addHandler = (title: string) => {
-    const newTodo: ITodo = {
-      title: title,
-      id: Date.now(),
-      completed: false,
-    };
-    setTodos((prev) => [newTodo, ...prev]);
-  };
+  }, [store.todos]); */
 
   return (
     <Container maxWidth="md">
       <Navbar />
-      <TodoForm onAdd={addHandler} />
-      <TodoList
-        todos={todos}
-        onToggle={toggleHandler}
-        onRemove={toggleRemove}
-      />
+      <TodoForm />
+      <TodoList todos={store.todos} />
     </Container>
   );
 };
 
-export default App;
+export default observer(App);

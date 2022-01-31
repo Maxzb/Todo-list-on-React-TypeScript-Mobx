@@ -8,8 +8,8 @@ export const useStyles = makeStyles(() => ({
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: 'auto',
-    padding: '0 30px',
-    lineHeight: '1.4em',
+    padding: '5px 30px',
+    lineHeight: '1.5em',
   },
   subtitle: {
     display: 'block',
