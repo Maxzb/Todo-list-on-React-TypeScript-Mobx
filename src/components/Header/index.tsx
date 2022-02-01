@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { observer } from "mobx-react-lite";
 import { Typography } from "@mui/material";
 import { useStyles } from "./styles";
 
-export const Navbar: FC = () => {
+export const Header: FC = observer(() => {
   const styles = useStyles();
 
   return (
@@ -19,4 +20,4 @@ export const Navbar: FC = () => {
       </Typography>
     </Typography>
   );
-};
+});

@@ -1,30 +1,20 @@
-import React, { FC, useEffect } from "react";
+import { FC } from "react";
 import { Container } from "@mui/material";
-import { Navbar } from "./components/Navbar";
+import { Header } from "./components/Header";
 import { TodoForm } from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
 import { observer } from "mobx-react-lite";
 import store from "./store";
-import { ITodo } from "./interfaces";
+import { ActiveTasks } from "./components/ActiveTasks";
+import { TodoView } from "./components/TodoView";
 
-const App: FC = () => {
-
-  useEffect(() => {
-    store.todos = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[];
-  }, []);
-
-  /* useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(store.todos)
-    );
-  }, [store.todos]); */
-
+export const App: FC = observer(() => {
   return (
     <Container maxWidth="md">
-      <Navbar />
+      <Header />
       <TodoForm />
-      <TodoList todos={store.todos} />
+      <TodoView />
+      <ActiveTasks />
     </Container>
   );
-};
-
-export default observer(App);
+});

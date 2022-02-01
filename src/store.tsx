@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { autorun, makeAutoObservable } from "mobx";
 import { ITodo } from "./interfaces";
 
 class Store {
@@ -7,6 +7,9 @@ class Store {
 
   constructor() {
     makeAutoObservable(this);
+
+    this.todos = JSON.parse(localStorage.getItem("todos") || "[]") as ITodo[];
+    autorun(() => localStorage.setItem("todos", JSON.stringify(this.todos)));
   }
 
   setTitle(text: string) {
@@ -15,7 +18,6 @@ class Store {
 
   addTodo = (title: string) => {
     const newTodo: ITodo = {
-      number: this.todos.length + 1,
       id: Date.now(),
       title: title,
       completed: false,
@@ -23,7 +25,6 @@ class Store {
     if (title.trim() !== "") {
       this.todos.push(newTodo);
       this.title = "";
-      localStorage.setItem("todos", JSON.stringify(this.todos));
     } else {
       alert("Внесите задачу!");
     }
@@ -42,7 +43,6 @@ class Store {
     const confirmDelete = window.confirm("Удалить задачу из списка?");
     if (confirmDelete) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
-      localStorage.setItem("todos", JSON.stringify(this.todos));
     }
   };
 
