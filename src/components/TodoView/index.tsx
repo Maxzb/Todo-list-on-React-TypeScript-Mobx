@@ -23,21 +23,17 @@ export const TodoView: FC = observer(() => {
   }
 
   return (
-    <Observer>
-      {() => (
-        <>
-          <Typography
-            className={styles.listTitle}
-            mt={3}
-            align="center"
-            variant="h6"
-            component="h2"
-          >
-            Список дел
-          </Typography>
-          <TodoList todos={store.todos} />
-        </>
-      )}
-    </Observer>
+    <>
+      <Typography
+        className={styles.listTitle}
+        mt={3}
+        align="center"
+        variant="h6"
+        component="h2"
+      >
+        Список дел
+      </Typography>
+      <TodoList todos={store.todos} />
+    </>
   );
 });

@@ -16,7 +16,7 @@ class Store {
     this.title = text;
   }
 
-  addTodo = (title: string) => {
+  addTodo = (title: string) => {    
     const newTodo: ITodo = {
       id: Date.now(),
       title: title,
